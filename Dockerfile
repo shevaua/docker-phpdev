@@ -10,6 +10,9 @@ RUN \
 	&& apt-get install -y tzdata software-properties-common \
     && add-apt-repository ppa:ondrej/php \
 	&& apt-get update \
-    && apt-get install -y nginx php7.1
+    && apt-get install -y nginx \
+    && apt-get install -y php7.1 php7.1-fpm
 
-CMD ["/bin/bash"]
+COPY scripts/back_start.sh /start.sh
+
+CMD ["/start.sh"]
