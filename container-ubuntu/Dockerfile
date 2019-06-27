@@ -13,6 +13,4 @@ RUN \
     && apt-get install -y nginx \
     && apt-get install -y php7.1 php7.1-fpm
 
-COPY scripts/back_start.sh /start.sh
-
-CMD ["/start.sh"]
+CMD ["/bin/bash"]

@@ -14,6 +14,12 @@ services:
   back:
     container_name: phpdev_back
     image: shevaua/phpdev:latest
+    volumes:
+      # DYNAMIC
+      - ./sites:/sites
+      # STATIC
+      - ./conf/nginx/conf.d:/etc/nginx/conf.d
+      - ./conf/nginx/sites:/etc/nginx/sites-enabled
     ports:
       - 80:80
     entrypoint: /start.sh
