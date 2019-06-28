@@ -17,8 +17,9 @@ services:
     volumes:
       # DYNAMIC
       - ./sites:/sites
+      - ./logs/nginx:/var/log/nginx
       # STATIC
-      - ./conf/nginx/conf.d:/etc/nginx/conf.d
+      - ./conf/nginx/templates:/etc/nginx/templates
       - ./conf/nginx/sites:/etc/nginx/sites-enabled
     ports:
       - 80:80
