@@ -2,17 +2,22 @@
 
 . common.sh
 
-build_ubuntu=1
+build_ubuntu=0
 
 docker images -a | grep $ubuntutag | grep -q $version
-if [ $? ]
+
+ubuntu_found=$?
+
+if [ $ubuntu_found = 0 ]
 then
     ynQuestion="Would you like to rebuild $ubuntutag"
     askYN
-    if [ $ynAnswer = 'n' ]
+    if [ $ynAnswer = 'y' ]
     then
-        build_ubuntu=0
+        build_ubuntu=1
     fi
+else
+    build_ubuntu=1
 fi
 
 if [ $build_ubuntu = 1 ]

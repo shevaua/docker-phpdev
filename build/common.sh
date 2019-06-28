@@ -1,5 +1,5 @@
 # IMAGE VERSION
-version=1.0.0
+version=1.0.1
 
 # UBUNTU IMAGE TAG
 ubuntutag=shevaua/ubuntu
