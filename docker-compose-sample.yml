@@ -1,0 +1,36 @@
+version: '3'
+
+networks:
+  # HOST IP:
+  # <host_ip>
+  localnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: <network>
+
+services:
+
+  back:
+    container_name: phpdev_back
+    image: shevaua/phpdev:latest
+    ports:
+      - 80:80
+    entrypoint: /start.sh
+    networks:
+      localnet:
+        ipv4_address: <be_ip>
+
+  db:
+    container_name: phpdev_db
+    image: "mysql:5.7"
+    networks:
+      localnet:
+        ipv4_address: <db_ip>
+
+  mc:
+    container_name: phpdev_mc
+    image: "memcached"
+    networks:
+      localnet:
+        ipv4_address: <mc_ip>
