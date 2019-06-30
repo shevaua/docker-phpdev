@@ -1,36 +1,70 @@
 version: '3'
 
 networks:
-  # HOST IP:
-  # <host_ip>
   localnet:
     driver: bridge
     ipam:
       config:
+        # NEED TO REPLACE
         - subnet: <network>
 
 services:
 
+  # DEV HOST IP WOULD BE THE FIRST IN THE NETWORK
+  # 192.168.1.1 in 192.168.1.0/24
+  # 10.0.0.1 in 10.0.0.0/8
+  # so on
+
+  # devhost:
+  #  networks:
+  #    localnet:
+  #       ipv4_address: <dev_ip>
+
   back:
     container_name: phpdev_back
     image: shevaua/phpdev:latest
+    entrypoint: /start.sh
     ports:
       - 80:80
-    entrypoint: /start.sh
     networks:
       localnet:
+        # NEED TO REPLACE
         ipv4_address: <be_ip>
+    volumes:
+      # DYNAMIC
+      - ./sites:<PWD_PATH>
+      # STATIC
+      - ./logs/nginx:/var/log/nginx
+      - ./conf/nginx/templates:/etc/nginx/templates
+      - ./conf/nginx/sites:/etc/nginx/sites-enabled
+    extra_hosts:
+      - "devhost:<dev_ip>"
+      - "backhost:<be_ip>"
+      - "dbhost:<db_ip>"
+      - "mchost:<mc_ip>"
+
 
   db:
     container_name: phpdev_db
     image: "mysql:5.7"
     networks:
       localnet:
+        # NEED TO REPLACE
         ipv4_address: <db_ip>
+    ports:
+      - 3306:3306
+    volumes:
+      - ./logs/mysql:/var/log/mysql
+      - ./data/mysql:/var/lib/mysql
+      - ./conf/mysql:/etc/mysql/mysql.conf.d
+    environment:
+      # NEED TO REPLACE
+      MYSQL_ROOT_PASSWORD:
 
   mc:
     container_name: phpdev_mc
     image: "memcached"
     networks:
       localnet:
+        # NEED TO REPLACE
         ipv4_address: <mc_ip>

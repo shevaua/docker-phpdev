@@ -1,19 +1,16 @@
 #!/bin/bash
 
-network=''
-minhosts=1
+DOCKER_FILE_SAMPLE="docker-compose-sample.yml"
+DOCKER_FILE="docker-compose.yml"
 
-function is_network_wrong() {
-    # TODO check network
-    return 1;
-}
+PROJECT_PATH=`dirname "${BASH_SOURCE[0]}"`
 
-function ask_network() {
-    read -p 'Network:' network
-}
+cd $PROJECT_PATH
+PROJECT_DIR=`pwd`
 
-ask_network
-while is_network_wrong; do
-    echo $network is not a network?!
-    ask_network
-done;
+DIR_SITES=$PROJECT_DIR"/sites"
+
+cp $DOCKER_FILE_SAMPLE $DOCKER_FILE
+sed -i -e "s#<PWD_PATH>#${DIR_SITES}#g" $DOCKER_FILE
+
+chmod 777 logs/mysql/error.log logs/mysql/query.log
