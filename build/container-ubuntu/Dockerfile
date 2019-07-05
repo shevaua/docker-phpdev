@@ -14,4 +14,5 @@ RUN \
     && apt-get install -y php5.6 php5.6-fpm \
     && apt-get install -y php7.0 php7.0-fpm \
     && apt-get install -y php7.1 php7.1-fpm \
-    && apt-get install -y php7.2 php7.2-fpm
+    && apt-get install -y php7.2 php7.2-fpm \
+    && rm -rf /var/lib/apt/lists/*

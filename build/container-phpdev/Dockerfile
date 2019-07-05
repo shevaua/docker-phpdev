@@ -1,5 +1,8 @@
 FROM shevaua/ubuntu:latest
 
-COPY scripts/back_start.sh /start.sh
+RUN \
+    php -r "copy('https://getcomposer.org/installer', '/composer-setup.php');" \
+    && php /composer-setup.php --install-dir=/usr/bin --filename=composer \
+    && php -r "unlink('/composer-setup.php');"
 
-CMD ["/start.sh"]
+COPY scripts/back_start.sh /start.sh

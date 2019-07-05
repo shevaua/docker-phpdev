@@ -12,8 +12,12 @@ PROJECT_DIR=`pwd`
 
 DIR_SITES=$PROJECT_DIR"/sites"
 
-cp $DOCKER_FILE_SAMPLE $DOCKER_FILE
-sed -i -e "s#<PWD_PATH>#${DIR_SITES}#g" $DOCKER_FILE
+if [ ! -f $DOCKER_FILE ]
+then
+    cp $DOCKER_FILE_SAMPLE $DOCKER_FILE
+    sed -i -e "s#<PWD_PATH>#${DIR_SITES}#g" $DOCKER_FILE
+fi
+
 echo "set \$sites $DIR_SITES;" > $NGINX_CONF
 
 chmod 777 \
