@@ -1,2 +1,5 @@
 docker-compose.yml
 conf/nginx/templates/variables.conf
+
+/sites/*
+!/sites/default/
