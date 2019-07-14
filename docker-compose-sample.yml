@@ -37,6 +37,10 @@ services:
       - ./logs/nginx:/var/log/nginx
       - ./conf/nginx/templates:/etc/nginx/templates
       - ./conf/nginx/sites:/etc/nginx/sites-enabled
+      - ./conf/php/ini/5.6.ini:/etc/php/5.6/fpm/conf.d/99-dev.ini
+      - ./conf/php/ini/7.0.ini:/etc/php/7.0/fpm/conf.d/99-dev.ini
+      - ./conf/php/ini/7.1.ini:/etc/php/7.1/fpm/conf.d/99-dev.ini
+      - ./conf/php/ini/7.2.ini:/etc/php/7.2/fpm/conf.d/99-dev.ini
     extra_hosts:
       - "devhost:<dev_ip>"
       - "backhost:<be_ip>"
