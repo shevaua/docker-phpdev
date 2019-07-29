@@ -21,6 +21,10 @@ fi
 echo "set \$sites $DIR_SITES;" > $NGINX_CONF
 
 chmod 777 \
+    logs/fpm/5.6/*.log \
+    logs/fpm/7.0/*.log \
+    logs/fpm/7.1/*.log \
+    logs/fpm/7.2/*.log \
     logs/mysql/error.log \
     logs/mysql/query.log \
     logs/nginx/debug.log \

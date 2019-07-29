@@ -6,3 +6,5 @@ conf/nginx/templates/variables.conf
 
 /conf/nginx/sites/*
 !/conf/nginx/sites/000-default.conf
+
+/vendor/
