@@ -4,6 +4,15 @@ PROJECT_PATH=`dirname "${BASH_SOURCE[0]}"`
 cd $PROJECT_PATH
 . common.sh
 
+for dir in "${dirs[@]}"
+do
+    if [ ! -d $dir ]
+    then
+        mkdir $dir
+        echo "$dir is created"
+    fi
+done
+
 for file in "${logs[@]}"
 do
     if [ ! -f $file ]
