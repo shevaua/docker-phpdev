@@ -72,7 +72,7 @@ services:
       - ./conf/mysql:/etc/mysql/mysql.conf.d
     environment:
       # NEED TO REPLACE
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_ROOT_PASSWORD: <mysql_pass>
 
   mc:
     container_name: phpdev_mc
