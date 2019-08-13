@@ -1,5 +1,6 @@
 docker-compose.yml
 conf/nginx/templates/variables.conf
+conf/php/fpm/*/999-dev.conf
 
 /sites/*
 !/sites/default/

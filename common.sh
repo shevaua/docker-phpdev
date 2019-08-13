@@ -26,3 +26,15 @@ declare -a logs=(
     "$PROJECT_DIR/logs/fpm/7.1/dev.access.log"
     "$PROJECT_DIR/logs/fpm/7.2/dev.access.log"
 )
+
+declare -a fpmconfs=(
+    "$PROJECT_DIR/conf/php/fpm/5.6/999-dev.conf"
+    "$PROJECT_DIR/conf/php/fpm/7.0/999-dev.conf"
+    "$PROJECT_DIR/conf/php/fpm/7.1/999-dev.conf"
+    "$PROJECT_DIR/conf/php/fpm/7.2/999-dev.conf"
+)
+
+NGINX_CONF="$PROJECT_DIR/conf/nginx/templates/variables.conf"
+
+USERID=`id -u`
+GROUPID=`id -g`

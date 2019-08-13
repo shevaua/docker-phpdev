@@ -25,7 +25,6 @@ done
 
 DOCKER_FILE_SAMPLE="docker-compose-sample.yml"
 DOCKER_FILE="docker-compose.yml"
-NGINX_CONF=conf/nginx/templates/variables.conf
 DIR_SITES=$PROJECT_DIR"/sites"
 
 if [ ! -f $DOCKER_FILE ]
@@ -52,3 +51,12 @@ then
 fi
 
 echo "set \$sites $DIR_SITES;" > $NGINX_CONF
+echo "$NGINX_CONF is updated"
+
+for file in "${fpmconfs[@]}"
+do
+    echo "[dev]" > $file
+    echo "user = $USERID" >> $file
+    echo "group = $GROUPID" >> $file
+    echo "$file is updated"
+done
