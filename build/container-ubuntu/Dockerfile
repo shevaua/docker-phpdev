@@ -8,6 +8,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN \
     apt-get update \
 	&& apt-get install -y tzdata software-properties-common \
+    && apt-get install -y curl \
+    && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     && add-apt-repository ppa:ondrej/php \
 	&& apt-get update \
     && apt-get install -y nginx \
@@ -17,4 +19,6 @@ RUN \
     && apt-get install -y php7.2 php7.2-fpm php7.2-curl php7.2-gd php7.2-mbstring               php7.2-mysql php7.2-xml php7.2-zip php7.2-xmlrpc php7.2-pgsql php7.2-soap             php7.2-xsl php7.2-bcmath php7.2-bz2 \
     && apt-get install -y php-xdebug php-memcache php-memcached php-raphf php-redis php-mongodb \
     && apt-get install -y unzip \
+    && apt-get install -y nodejs \
+    && apt-get purge -y curl \
     && rm -rf /var/lib/apt/lists/*

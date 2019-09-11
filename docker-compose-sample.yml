@@ -22,7 +22,7 @@ services:
 
   back:
     container_name: phpdev_back
-    image: shevaua/phpdev:latest
+    image: shevaua/phpdev:1.0.6
     entrypoint: /start.sh
     ports:
       - 80:80
@@ -49,7 +49,9 @@ services:
       - ./conf/php/fpm/7.0:/etc/php/7.0/fpm/pool.d
       - ./conf/php/fpm/7.1:/etc/php/7.1/fpm/pool.d
       - ./conf/php/fpm/7.2:/etc/php/7.2/fpm/pool.d
-      - ./cache/composer/:/.composer/cache
+      - ./conf/npm:/.config
+      - ./cache/composer:/.composer/cache
+      - ./cache/npm:/.npm
     extra_hosts:
       - "devhost:<dev_ip>"
       - "backhost:<be_ip>"
