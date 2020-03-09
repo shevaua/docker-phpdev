@@ -32,6 +32,22 @@ if [ $status -ne 0 ]; then
     exit $status
 fi
 
+# FPM7.3
+/etc/init.d/php7.3-fpm start
+status=$?
+if [ $status -ne 0 ]; then
+    echo "Failed to start php7.3-fpm: $status"
+    exit $status
+fi
+
+# FPM7.4
+/etc/init.d/php7.4-fpm start
+status=$?
+if [ $status -ne 0 ]; then
+    echo "Failed to start php7.4-fpm: $status"
+    exit $status
+fi
+
 # NGINX
 /etc/init.d/nginx start
 status=$?
@@ -74,6 +90,20 @@ while sleep 60; do
     FPM72_STATUS=$?
     if [ $FPM72_STATUS -ne 0 ]; then
         echo "FPM7.2 has already exited."
+        exit 1
+    fi
+
+    ps aux | grep "php-fpm: master" | grep "7.3" -q
+    FPM73_STATUS=$?
+    if [ $FPM73_STATUS -ne 0 ]; then
+        echo "FPM7.3 has already exited."
+        exit 1
+    fi
+
+    ps aux | grep "php-fpm: master" | grep "7.4" -q
+    FPM74_STATUS=$?
+    if [ $FPM74_STATUS -ne 0 ]; then
+        echo "FPM7.4 has already exited."
         exit 1
     fi
 
