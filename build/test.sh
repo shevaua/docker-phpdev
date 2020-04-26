@@ -4,5 +4,5 @@
 
 docker run -it --rm \
     --name test \
-    $devtag \
+    $devtag:$version \
     /bin/bash

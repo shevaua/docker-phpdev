@@ -22,7 +22,7 @@ services:
 
   back:
     container_name: phpdev_back
-    image: shevaua/phpdev:1.0.7
+    image: shevaua/phpdev:1.0.8
     entrypoint: /start.sh
     ports:
       - 80:80
