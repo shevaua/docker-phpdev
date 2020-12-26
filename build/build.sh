@@ -3,6 +3,7 @@
 . common.sh
 
 build_ubuntu=0
+build_failed=0
 
 docker images -a | grep $ubuntutag | grep -q $version
 
@@ -22,13 +23,20 @@ fi
 
 if [ $build_ubuntu = 1 ]
 then
+    echo "Building ubuntu"
     docker build ./container-ubuntu \
         --tag $ubuntutag:$version \
         --tag $ubuntutag:latest \
         --no-cache
+    
+    build_failed=$?
 fi
 
-docker build ./container-phpdev \
-    --tag $devtag:$version \
-    --tag $devtag:latest \
-    --no-cache
+if [ $build_failed = 0 ]
+then
+    echo "Building phpdev"
+    docker build ./container-phpdev \
+        --tag $devtag:$version \
+        --tag $devtag:latest \
+        --no-cache
+fi
