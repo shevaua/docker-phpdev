@@ -23,5 +23,6 @@ RUN \
     && apt-get install -y php-xdebug php-memcache php-memcached php-raphf php-redis php-mongodb \
     && apt-get install -y unzip \
     && apt-get install -y nodejs \
+    && apt-get install -y git \
     && apt-get purge -y curl \
     && rm -rf /var/lib/apt/lists/*
