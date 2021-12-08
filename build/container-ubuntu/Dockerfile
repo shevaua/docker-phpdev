@@ -22,6 +22,7 @@ RUN \
     && apt-get install -y php8.0 php8.0-fpm php8.0-curl php8.0-gd php8.0-mbstring php8.0-sqlite3               php8.0-mysql php8.0-xml php8.0-zip               php8.0-pgsql php8.0-soap \
     && apt-get install -y php-xdebug php-memcache php-memcached php-raphf php-redis php-mongodb \
     && apt-get install -y unzip \
+    && apt-get install -y git \
     && apt-get install -y nodejs \
     && apt-get purge -y curl \
     && rm -rf /var/lib/apt/lists/*

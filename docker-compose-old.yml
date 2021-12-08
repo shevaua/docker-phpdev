@@ -1,0 +1,115 @@
+version: '3'
+
+networks:
+  localnet:
+    driver: bridge
+    ipam:
+      config:
+        # NEED TO REPLACE
+        - subnet: 192.168.111.3.0/24
+
+services:
+
+  # DEV HOST IP WOULD BE THE FIRST IN THE NETWORK
+  # 192.168.1.1 in 192.168.1.0/24
+  # 10.0.0.1 in 10.0.0.0/8
+  # so on
+
+  # devhost:
+  #  networks:
+  #    localnet:
+  #       ipv4_address: 192.168.111.3.1
+
+  back:
+    container_name: phpdev_back
+    image: shevaua/phpdev:1.2.0
+    entrypoint: /start.sh
+    ports:
+      - 80:80
+    networks:
+      localnet:
+        # NEED TO REPLACE
+        ipv4_address: 192.168.111.3.2
+    volumes:
+      # DYNAMIC
+      - ./sites:/home/anton/projects/php/sites
+      # STATIC
+      - ./logs/nginx:/var/log/nginx
+      - ./logs/fpm/5.6:/var/log/php5.6-fpm
+      - ./logs/fpm/7.0:/var/log/php7.0-fpm
+      - ./logs/fpm/7.1:/var/log/php7.1-fpm
+      - ./logs/fpm/7.2:/var/log/php7.2-fpm
+      - ./logs/fpm/7.3:/var/log/php7.3-fpm
+      - ./logs/fpm/7.4:/var/log/php7.4-fpm
+      - ./logs/fpm/8.0:/var/log/php8.0-fpm
+      - ./conf/nginx/templates:/etc/nginx/templates
+      - ./conf/nginx/sites:/etc/nginx/sites-enabled
+      - ./conf/php/ini/5.6.ini:/etc/php/5.6/fpm/conf.d/98-dev.ini
+      - ./conf/php/ini/7.0.ini:/etc/php/7.0/fpm/conf.d/98-dev.ini
+      - ./conf/php/ini/7.1.ini:/etc/php/7.1/fpm/conf.d/98-dev.ini
+      - ./conf/php/ini/7.2.ini:/etc/php/7.2/fpm/conf.d/98-dev.ini
+      - ./conf/php/ini/7.3.ini:/etc/php/7.3/fpm/conf.d/98-dev.ini
+      - ./conf/php/ini/7.4.ini:/etc/php/7.4/fpm/conf.d/98-dev.ini
+      - ./conf/php/ini/8.0.ini:/etc/php/8.0/fpm/conf.d/98-dev.ini
+      - ./conf/php/ini/5.6.ini:/etc/php/5.6/cli/conf.d/98-dev.ini
+      - ./conf/php/ini/7.0.ini:/etc/php/7.0/cli/conf.d/98-dev.ini
+      - ./conf/php/ini/7.1.ini:/etc/php/7.1/cli/conf.d/98-dev.ini
+      - ./conf/php/ini/7.2.ini:/etc/php/7.2/cli/conf.d/98-dev.ini
+      - ./conf/php/ini/7.3.ini:/etc/php/7.3/cli/conf.d/98-dev.ini
+      - ./conf/php/ini/7.4.ini:/etc/php/7.4/cli/conf.d/98-dev.ini
+      - ./conf/php/ini/8.0.ini:/etc/php/8.0/cli/conf.d/98-dev.ini
+      - ./conf/php/ini/mods.ini:/etc/php/5.6/fpm/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/7.0/fpm/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/7.1/fpm/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/7.2/fpm/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/7.3/fpm/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/7.4/fpm/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/8.0/fpm/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/5.6/cli/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/7.0/cli/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/7.1/cli/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/7.2/cli/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/7.3/cli/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/7.4/cli/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/8.0/cli/conf.d/99-mod.ini
+      - ./conf/php/fpm/5.6:/etc/php/5.6/fpm/pool.d
+      - ./conf/php/fpm/7.0:/etc/php/7.0/fpm/pool.d
+      - ./conf/php/fpm/7.1:/etc/php/7.1/fpm/pool.d
+      - ./conf/php/fpm/7.2:/etc/php/7.2/fpm/pool.d
+      - ./conf/php/fpm/7.3:/etc/php/7.3/fpm/pool.d
+      - ./conf/php/fpm/7.4:/etc/php/7.4/fpm/pool.d
+      - ./conf/php/fpm/8.0:/etc/php/8.0/fpm/pool.d
+      - ./conf/npm:/.config
+      - ./cache/composer:/.composer/cache
+      - ./cache/npm:/.npm
+    extra_hosts:
+      - "devhost:192.168.111.3.1"
+      - "backhost:192.168.111.3.2"
+      - "dbhost:192.168.111.3.3"
+      - "mchost:192.168.111.3.4"
+
+
+  db:
+    container_name: phpdev_db
+    image: "mysql:5.7"
+    networks:
+      localnet:
+        # NEED TO REPLACE
+        ipv4_address: 192.168.111.3.3
+    ports:
+      - 3306:3306
+    volumes:
+      - ./logs/mysql:/var/log/mysql
+      - ./data/mysql:/var/lib/mysql
+      - ./conf/mysql:/etc/mysql/mysql.conf.d
+    environment:
+      # NEED TO REPLACE
+      MYSQL_ROOT_PASSWORD: password
+
+  mc:
+    container_name: phpdev_mc
+    image: "memcached"
+    networks:
+      localnet:
+        # NEED TO REPLACE
+        ipv4_address: 192.168.111.3.4
