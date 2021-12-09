@@ -48,11 +48,19 @@ if [ $status -ne 0 ]; then
     exit $status
 fi
 
-# FPM7.4
+# FPM8.0
 /etc/init.d/php8.0-fpm start
 status=$?
 if [ $status -ne 0 ]; then
     echo "Failed to start php8.0-fpm: $status"
+    exit $status
+fi
+
+# FPM8.1
+/etc/init.d/php8.1-fpm start
+status=$?
+if [ $status -ne 0 ]; then
+    echo "Failed to start php8.1-fpm: $status"
     exit $status
 fi
 
@@ -119,6 +127,13 @@ while sleep 60; do
     FPM80_STATUS=$?
     if [ $FPM80_STATUS -ne 0 ]; then
         echo "FPM8.0 has already exited."
+        exit 1
+    fi
+
+    ps aux | grep "php-fpm: master" | grep "8.1" -q
+    FPM81_STATUS=$?
+    if [ $FPM81_STATUS -ne 0 ]; then
+        echo "FPM8.1 has already exited."
         exit 1
     fi
 

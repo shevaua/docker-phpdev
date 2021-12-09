@@ -22,7 +22,7 @@ services:
 
   back:
     container_name: phpdev_back
-    image: shevaua/phpdev:1.1.0
+    image: shevaua/phpdev:1.2.0
     entrypoint: /start.sh
     ports:
       - 80:80
@@ -42,6 +42,7 @@ services:
       - ./logs/fpm/7.3:/var/log/php7.3-fpm
       - ./logs/fpm/7.4:/var/log/php7.4-fpm
       - ./logs/fpm/8.0:/var/log/php8.0-fpm
+      - ./logs/fpm/8.1:/var/log/php8.1-fpm
       - ./conf/nginx/templates:/etc/nginx/templates
       - ./conf/nginx/sites:/etc/nginx/sites-enabled
       - ./conf/php/ini/5.6.ini:/etc/php/5.6/fpm/conf.d/98-dev.ini
@@ -51,6 +52,7 @@ services:
       - ./conf/php/ini/7.3.ini:/etc/php/7.3/fpm/conf.d/98-dev.ini
       - ./conf/php/ini/7.4.ini:/etc/php/7.4/fpm/conf.d/98-dev.ini
       - ./conf/php/ini/8.0.ini:/etc/php/8.0/fpm/conf.d/98-dev.ini
+      - ./conf/php/ini/8.1.ini:/etc/php/8.1/fpm/conf.d/98-dev.ini
       - ./conf/php/ini/5.6.ini:/etc/php/5.6/cli/conf.d/98-dev.ini
       - ./conf/php/ini/7.0.ini:/etc/php/7.0/cli/conf.d/98-dev.ini
       - ./conf/php/ini/7.1.ini:/etc/php/7.1/cli/conf.d/98-dev.ini
@@ -58,6 +60,7 @@ services:
       - ./conf/php/ini/7.3.ini:/etc/php/7.3/cli/conf.d/98-dev.ini
       - ./conf/php/ini/7.4.ini:/etc/php/7.4/cli/conf.d/98-dev.ini
       - ./conf/php/ini/8.0.ini:/etc/php/8.0/cli/conf.d/98-dev.ini
+      - ./conf/php/ini/8.1.ini:/etc/php/8.1/cli/conf.d/98-dev.ini
       - ./conf/php/ini/mods.ini:/etc/php/5.6/fpm/conf.d/99-mod.ini
       - ./conf/php/ini/mods.ini:/etc/php/7.0/fpm/conf.d/99-mod.ini
       - ./conf/php/ini/mods.ini:/etc/php/7.1/fpm/conf.d/99-mod.ini
@@ -65,6 +68,7 @@ services:
       - ./conf/php/ini/mods.ini:/etc/php/7.3/fpm/conf.d/99-mod.ini
       - ./conf/php/ini/mods.ini:/etc/php/7.4/fpm/conf.d/99-mod.ini
       - ./conf/php/ini/mods.ini:/etc/php/8.0/fpm/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/8.1/fpm/conf.d/99-mod.ini
       - ./conf/php/ini/mods.ini:/etc/php/5.6/cli/conf.d/99-mod.ini
       - ./conf/php/ini/mods.ini:/etc/php/7.0/cli/conf.d/99-mod.ini
       - ./conf/php/ini/mods.ini:/etc/php/7.1/cli/conf.d/99-mod.ini
@@ -72,6 +76,7 @@ services:
       - ./conf/php/ini/mods.ini:/etc/php/7.3/cli/conf.d/99-mod.ini
       - ./conf/php/ini/mods.ini:/etc/php/7.4/cli/conf.d/99-mod.ini
       - ./conf/php/ini/mods.ini:/etc/php/8.0/cli/conf.d/99-mod.ini
+      - ./conf/php/ini/mods.ini:/etc/php/8.1/cli/conf.d/99-mod.ini
       - ./conf/php/fpm/5.6:/etc/php/5.6/fpm/pool.d
       - ./conf/php/fpm/7.0:/etc/php/7.0/fpm/pool.d
       - ./conf/php/fpm/7.1:/etc/php/7.1/fpm/pool.d
@@ -79,6 +84,7 @@ services:
       - ./conf/php/fpm/7.3:/etc/php/7.3/fpm/pool.d
       - ./conf/php/fpm/7.4:/etc/php/7.4/fpm/pool.d
       - ./conf/php/fpm/8.0:/etc/php/8.0/fpm/pool.d
+      - ./conf/php/fpm/8.1:/etc/php/8.1/fpm/pool.d
       - ./conf/npm:/.config
       - ./cache/composer:/.composer/cache
       - ./cache/npm:/.npm

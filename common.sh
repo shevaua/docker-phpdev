@@ -12,6 +12,7 @@ declare -a dirs=(
     "$PROJECT_DIR/logs/fpm/7.3/"
     "$PROJECT_DIR/logs/fpm/7.4/"
     "$PROJECT_DIR/logs/fpm/8.0/"
+    "$PROJECT_DIR/logs/fpm/8.1/"
 )
 
 declare -a logs=(
@@ -27,6 +28,7 @@ declare -a logs=(
     "$PROJECT_DIR/logs/fpm/7.3/error.log"
     "$PROJECT_DIR/logs/fpm/7.4/error.log"
     "$PROJECT_DIR/logs/fpm/8.0/error.log"
+    "$PROJECT_DIR/logs/fpm/8.1/error.log"
     "$PROJECT_DIR/logs/fpm/5.6/dev.access.log"
     "$PROJECT_DIR/logs/fpm/7.0/dev.access.log"
     "$PROJECT_DIR/logs/fpm/7.1/dev.access.log"
@@ -34,6 +36,7 @@ declare -a logs=(
     "$PROJECT_DIR/logs/fpm/7.3/dev.access.log"
     "$PROJECT_DIR/logs/fpm/7.4/dev.access.log"
     "$PROJECT_DIR/logs/fpm/8.0/dev.access.log"
+    "$PROJECT_DIR/logs/fpm/8.1/dev.access.log"
 )
 
 declare -a fpmconfs=(
@@ -44,6 +47,7 @@ declare -a fpmconfs=(
     "$PROJECT_DIR/conf/php/fpm/7.3/999-dev.conf"
     "$PROJECT_DIR/conf/php/fpm/7.4/999-dev.conf"
     "$PROJECT_DIR/conf/php/fpm/8.0/999-dev.conf"
+    "$PROJECT_DIR/conf/php/fpm/8.1/999-dev.conf"
 )
 
 NGINX_CONF="$PROJECT_DIR/conf/nginx/templates/variables.conf"

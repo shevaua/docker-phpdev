@@ -7,5 +7,6 @@ cd $PROJECT_PATH
 for file in "${logs[@]}"
 do
     echo "" > $file
+    chmod 777 $file
     echo "$file is cleaned"
 done
